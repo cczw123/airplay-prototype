@@ -61,3 +61,6 @@ crashlytics-build.properties
 # JetBrain
 .idea/
 
+# Photon
+Photon/
+Photon.meta
