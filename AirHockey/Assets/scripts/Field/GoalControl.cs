@@ -4,22 +4,41 @@ using UnityEngine;
 
 public class GoalControl : MonoBehaviour
 {
+    public GoalType goalType;
+    private Coroutine goalCoroutine;
+
+    public enum GoalType
+    {
+        LEFT = 0,
+        RIGHT = 1
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Hockey"))
         {
-            if (gameObject.name == "net")
+            if (goalCoroutine != null)
             {
-                GameManager.Inst.playerPrefab.GetComponent<PlayerManager>().team1++;
-            }
-            else
-            {
-                GameManager.Inst.playerPrefab.GetComponent<PlayerManager>().team2++;
+                StopCoroutine(goalCoroutine);
             }
 
-            collision.gameObject.SetActive(false);
-            collision.gameObject.transform.position = Vector2.zero;
-            collision.gameObject.SetActive(true);
+            goalCoroutine = StartCoroutine(Goal(collision.gameObject, collision.transform));
+        }
+    }
+
+    private IEnumerator Goal(GameObject hockey, Transform current)
+    {
+        if (hockey.CompareTag("Hockey"))
+        {
+            hockey.SetActive(false);
+            GameManager.Inst.scores[(int) goalType] += 1;
+            AudioManager.Instance.PlayGoalAudio(current);
+            yield return new WaitForSeconds(1);
+            AudioManager.Instance.PlayJubilianceAudio(current);
+
+            // todo: add a sound for resetting the ball
+            hockey.transform.position = Vector3.zero;
+            hockey.SetActive(true);
         }
     }
 }

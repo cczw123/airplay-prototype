@@ -18,12 +18,14 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             // We own this player: send the others our data
             stream.SendNext(team1);
             stream.SendNext(team2);
+            stream.SendNext(GameManager.Inst.scores);
         }
         else
         {
             // Network player, receive data
-            this.team1 = (int) stream.ReceiveNext();
-            this.team2 = (int) stream.ReceiveNext();
+            team1 = (int) stream.ReceiveNext();
+            team2 = (int) stream.ReceiveNext();
+            GameManager.Inst.scores = (int[]) stream.ReceiveNext();
         }
     }
 
@@ -52,17 +54,13 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.IsMine)
         {
-            PlayerManager.LocalPlayerInstance = this.gameObject;
+            LocalPlayerInstance = gameObject;
             GetComponent<SpriteRenderer>().color = Color.cyan;
         }
 
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        DontDestroyOnLoad(this.gameObject);
-    }
-
-    void Update()
-    {
+        DontDestroyOnLoad(gameObject);
     }
 
     #endregion
