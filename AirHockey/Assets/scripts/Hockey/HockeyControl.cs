@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class HockeyControl : MonoBehaviour
 {
     public Vector2 initial_force;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,8 +14,4 @@ public class HockeyControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -6,7 +6,7 @@ public class GoalControl : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "ball")
+        if (collision.gameObject.CompareTag("Hockey"))
         {
             if (gameObject.name == "net")
             {
