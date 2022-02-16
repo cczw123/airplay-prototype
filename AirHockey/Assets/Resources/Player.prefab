@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8956873944693141290}
   - component: {fileID: 8956873944693141292}
   m_Layer: 6
-  m_Name: Person
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292b295aa90fd764e80bf7ae83c5a6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  people_force: 10
+  kickForce: 10
   speed: 6.5
 --- !u!114 &8956873944693141293
 MonoBehaviour:
@@ -156,10 +156,9 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
+  observableSearch: 0
   ObservedComponents:
-  - {fileID: 8956873944693141290}
-  - {fileID: 8956873944693141292}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -178,7 +177,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!114 &8956873944693141292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,5 +190,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2237ca8ffb63c74186418f8a5d300ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team1: 28
-  team2: 14
+  team1: 29
+  team2: 15

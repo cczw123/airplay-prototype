@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ball_Ctr : MonoBehaviour
+public class HockeyControl : MonoBehaviour
 {
     public Vector2 initial_force;
     // Start is called before the first frame update
