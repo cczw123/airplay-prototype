@@ -4,13 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerControl : MonoBehaviourPun
 {
     public float kickForce = 10f;
 
     public float speed;
 
+    private Rigidbody2D rigidbody2D;
+
     // Start is called before the first frame update
+    private void Start()
+    {
+        rigidbody2D = GetComponent<Rigidbody2D>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -40,23 +47,31 @@ public class PlayerControl : MonoBehaviourPun
     {
         float horizontal = Input.GetAxis("Horizontal") * speed;
         float vertical = Input.GetAxis("Vertical") * speed;
-        Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+        Vector2 velocity = rigidbody2D.velocity;
         velocity.x = horizontal;
         velocity.y = vertical;
-        GetComponent<Rigidbody2D>().velocity = velocity;
+        rigidbody2D.velocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject);
-        Vector2 force = collision.gameObject.transform.position - transform.position;
-        force *= kickForce;
-
-        if (Input.GetMouseButton(0))
+        if (collision.gameObject.CompareTag("Hockey"))
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(2 * force);
-        }
+            Vector2 force = collision.gameObject.transform.position - transform.position;
+            force *= kickForce;
+            AudioManager.Instance.PlayKickAudio(collision.transform);
+            Rigidbody2D hockeyRigidbody2D = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (hockeyRigidbody2D == null)
+            {
+                return;
+            }
 
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            if (Input.GetMouseButton(0))
+            {
+                hockeyRigidbody2D.AddForce(2 * force);
+            }
+
+            hockeyRigidbody2D.AddForce(force);
+        }
     }
 }

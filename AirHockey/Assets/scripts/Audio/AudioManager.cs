@@ -13,12 +13,14 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> goalAudioList = new List<AudioClip>();
     public List<AudioClip> jubilianceAudioList = new List<AudioClip>();
     public List<AudioClip> boundaryAudioList = new List<AudioClip>();
+    public List<AudioClip> kickAudioList = new List<AudioClip>();
 
     private enum AudioCondition
     {
         GOAL = 0,
         JUBILIANCE = 1,
-        BOUNDARY = 2
+        BOUNDARY = 2,
+        KICK = 3
     }
 
     private void Awake()
@@ -43,6 +45,11 @@ public class AudioManager : MonoBehaviour
         PlayAudio(AudioCondition.BOUNDARY, goalTransform.position);
     }
 
+    public void PlayKickAudio(Transform targetTransform)
+    {
+        PlayAudio(AudioCondition.KICK, targetTransform.position);
+    }
+
     public void PlayJubilianceAudio(Transform goalTransform)
     {
         PlayAudio(AudioCondition.JUBILIANCE, goalTransform.position);
@@ -53,15 +60,18 @@ public class AudioManager : MonoBehaviour
         List<AudioClip> playList;
         switch (condition)
         {
-            case AudioCondition.GOAL:
-                playList = goalAudioList;
-                break;
             case AudioCondition.BOUNDARY:
             default:
                 playList = boundaryAudioList;
                 break;
+            case AudioCondition.GOAL:
+                playList = goalAudioList;
+                break;
             case AudioCondition.JUBILIANCE:
                 playList = jubilianceAudioList;
+                break;
+            case AudioCondition.KICK:
+                playList = kickAudioList;
                 break;
         }
 

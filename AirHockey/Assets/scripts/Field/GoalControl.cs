@@ -33,7 +33,7 @@ public class GoalControl : MonoBehaviour
             hockey.SetActive(false);
             GameManager.Inst.scores[(int) goalType] += 1;
             AudioManager.Instance.PlayGoalAudio(current);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             AudioManager.Instance.PlayJubilianceAudio(current);
 
             // todo: add a sound for resetting the ball
