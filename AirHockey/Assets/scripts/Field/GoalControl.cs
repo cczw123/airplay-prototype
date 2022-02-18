@@ -33,9 +33,9 @@ public class GoalControl : MonoBehaviour
             hockey.SetActive(false);
             GameManager.Inst.scores[(int) goalType] += 1;
             AudioManager.Instance.PlayGoalAudio(current);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             AudioManager.Instance.PlayJubilianceAudio(current);
-
+            yield return new WaitForSeconds(1f);
             // todo: add a sound for resetting the ball
             hockey.transform.position = Vector3.zero;
             hockey.SetActive(true);

@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        int choice = Random.Range(0, playList.Count - 1);
+        int choice = Random.Range(0, playList.Count);
         AudioSource.PlayClipAtPoint(playList[choice], position);
     }
 }
