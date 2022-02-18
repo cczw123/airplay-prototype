@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Launcher.unity
     guid: d7d9bce969f93f3458d3b4a4ab6be66e
   - enabled: 1
-    path: Assets/Scenes/airplay.unity
+    path: Assets/Scenes/AirHockjey/airplay.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
