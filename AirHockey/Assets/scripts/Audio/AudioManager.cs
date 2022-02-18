@@ -14,13 +14,15 @@ public class AudioManager : MonoBehaviour
     public List<AudioClip> jubilianceAudioList = new List<AudioClip>();
     public List<AudioClip> boundaryAudioList = new List<AudioClip>();
     public List<AudioClip> kickAudioList = new List<AudioClip>();
+    public List<AudioClip> openingAudioList = new List<AudioClip>();
 
     private enum AudioCondition
     {
         GOAL = 0,
         JUBILIANCE = 1,
         BOUNDARY = 2,
-        KICK = 3
+        KICK = 3,
+        OPENING = 4
     }
 
     private void Awake()
@@ -35,24 +37,29 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayGoalAudio(Transform goalTransform)
+    public void PlayGoalAudio(Vector3 pos)
     {
-        PlayAudio(AudioCondition.GOAL, goalTransform.position);
+        PlayAudio(AudioCondition.GOAL, pos);
     }
 
-    public void PlayBoundaryAudio(Transform goalTransform)
+    public void PlayBoundaryAudio(Vector3 pos)
     {
-        PlayAudio(AudioCondition.BOUNDARY, goalTransform.position);
+        PlayAudio(AudioCondition.BOUNDARY, pos);
     }
 
-    public void PlayKickAudio(Transform targetTransform)
+    public void PlayKickAudio(Vector3 pos)
     {
-        PlayAudio(AudioCondition.KICK, targetTransform.position);
+        PlayAudio(AudioCondition.KICK, pos);
     }
 
-    public void PlayJubilianceAudio(Transform goalTransform)
+    public void PlayJubilianceAudio(Vector3 pos)
     {
-        PlayAudio(AudioCondition.JUBILIANCE, goalTransform.position);
+        PlayAudio(AudioCondition.JUBILIANCE, pos);
+    }
+
+    public void PlayOpeningAudio(Vector3 pos)
+    {
+        PlayAudio(AudioCondition.OPENING, pos);
     }
 
     private void PlayAudio(AudioCondition condition, Vector3 position)
@@ -72,6 +79,9 @@ public class AudioManager : MonoBehaviour
                 break;
             case AudioCondition.KICK:
                 playList = kickAudioList;
+                break;
+            case AudioCondition.OPENING:
+                playList = openingAudioList;
                 break;
         }
 

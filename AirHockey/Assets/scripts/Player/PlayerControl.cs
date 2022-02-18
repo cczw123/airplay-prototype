@@ -81,7 +81,7 @@ public class PlayerControl : MonoBehaviourPun
             Vector2 force = collision.gameObject.transform.position - transform.position;
             force *= kickForce * kickFactor;
             hockeyRigidbody2D.AddForce(force);
-            AudioManager.Instance.PlayKickAudio(collision.transform);
+            AudioManager.Instance.PlayKickAudio(collision.transform.position);
         }
     }
 }

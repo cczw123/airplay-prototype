@@ -897,13 +897,19 @@ MonoBehaviour:
   goalAudioList:
   - {fileID: 8300000, guid: f0c3ad4f458cb1f459da807fd86cf819, type: 3}
   - {fileID: 8300000, guid: d27c4fa5339cf8c46b2f19343d71ae3a, type: 3}
+  - {fileID: 8300000, guid: 1c2db24b77a5c7441ae070c37e8cbe13, type: 3}
   jubilianceAudioList:
   - {fileID: 8300000, guid: 74ca5e43cf402bc46842a89c90cb1642, type: 3}
+  - {fileID: 8300000, guid: ecc894c67e0594d45af09bd603a00e0d, type: 3}
   boundaryAudioList:
   - {fileID: 8300000, guid: 08d3ee77f2d08684087b6a7b323292d9, type: 3}
   kickAudioList:
   - {fileID: 8300000, guid: 70e1bf506e91944418098d18d70bbce8, type: 3}
   - {fileID: 8300000, guid: d38c2ba42343fb74284a3fdc6881ee60, type: 3}
+  - {fileID: 8300000, guid: d4b08993fffb46948820b8e9497761d7, type: 3}
+  openingAudioList:
+  - {fileID: 8300000, guid: b1346996235756a45a255df1c0be3f1a, type: 3}
+  - {fileID: 8300000, guid: 0d31954db45e99b42910bfb1d2bc4f54, type: 3}
 --- !u!1 &1454242633
 GameObject:
   m_ObjectHideFlags: 0

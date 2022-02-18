@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using Random = UnityEngine.Random;
 
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public static GameManager Inst;
     public int[] scores = new int[2];
+    private Coroutine currentOpeningCoroutine;
 
     private void Awake()
     {
@@ -41,6 +43,27 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+    }
+
+    public IEnumerator StartGameCoroutine(GameObject hockey = null)
+    {
+        AudioManager.Instance.PlayOpeningAudio(Vector3.zero);
+        if (hockey)
+        {
+            yield return new WaitForSeconds(0.5f);
+            hockey.transform.position = Vector3.zero;
+            hockey.SetActive(true);
+        }
+    }
+
+    public void StartGame(GameObject hockey = null)
+    {
+        if (currentOpeningCoroutine != null)
+        {
+            StopCoroutine(currentOpeningCoroutine);
+        }
+
+        currentOpeningCoroutine = StartCoroutine(StartGameCoroutine(hockey));
     }
 
     #endregion
@@ -79,7 +102,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
             // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-            PhotonNetwork.Instantiate(playerPrefab.name, new Vector2(0f, 0f), Quaternion.identity, 0);
+            PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(Random.Range(-7f, 7f), Random.Range(-3f, 3f), 0f),
+                Quaternion.identity, 0);
+            StartGame();
         }
         else
         {

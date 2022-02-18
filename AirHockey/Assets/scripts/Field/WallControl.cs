@@ -11,7 +11,7 @@ public class WallControl : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Hockey"))
         {
-            AudioManager.Instance.PlayBoundaryAudio(other.transform);
+            AudioManager.Instance.PlayBoundaryAudio(other.transform.position);
         }
     }
 }
