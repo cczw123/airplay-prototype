@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class ScoreDisplay : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text leftTeam;
-    public Text rightTeam;
+    public List<Text> leftTeam = new List<Text>();
+    public List<Text> rightTeam = new List<Text>();
 
     void Start()
     {
@@ -17,7 +17,14 @@ public class ScoreDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        leftTeam.text = GameManager.Inst.scores[0].ToString();
-        rightTeam.text = GameManager.Inst.scores[1].ToString();
+        foreach (var left in leftTeam)
+        {
+            left.text = GameManager.Inst.scores[0].ToString("D2");
+        }
+
+        foreach (var right in rightTeam)
+        {
+            right.text = GameManager.Inst.scores[1].ToString("D2");
+        }
     }
 }

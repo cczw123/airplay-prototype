@@ -16,15 +16,15 @@ public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             // We own this player: send the others our data
-            stream.SendNext(team1);
-            stream.SendNext(team2);
+            // stream.SendNext(team1);
+            // stream.SendNext(team2);
             stream.SendNext(GameManager.Inst.scores);
         }
         else
         {
             // Network player, receive data
-            team1 = (int) stream.ReceiveNext();
-            team2 = (int) stream.ReceiveNext();
+            // team1 = (int) stream.ReceiveNext();
+            // team2 = (int) stream.ReceiveNext();
             GameManager.Inst.scores = (int[]) stream.ReceiveNext();
         }
     }

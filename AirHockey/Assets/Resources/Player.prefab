@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8956873944693141293}
   - component: {fileID: 8956873944693141290}
   - component: {fileID: 8956873944693141292}
+  - component: {fileID: 5396709184868751011}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -138,7 +139,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kickForce: 10
-  speed: 6.5
+  kickFactorPreset:
+  - 1
+  - 2
+  localScalePreset:
+  - {x: 0.7, y: 0.7, z: 0.7}
+  - {x: 0.9, y: 0.9, z: 0.9}
+  speed: 9
 --- !u!114 &8956873944693141293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +199,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team1: 30
   team2: 15
+--- !u!114 &5396709184868751011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956873944693141284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 541a76f9c03874323b5154b14ac00427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spline: {fileID: 0}
+  Speed: 0
+  lookForward: 0
+  reverse: 0
+  currentDistance: 0
+  currentClampedDistance: 0
