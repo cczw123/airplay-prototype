@@ -11,3 +11,8 @@
 
 
 
+### 3. Before Building
+
+Make sure this option is checked before WebGL building
+
+![image-20220218143642289](readme.assets/image-20220218143642289.png)
