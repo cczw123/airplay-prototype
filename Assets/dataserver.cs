@@ -13,7 +13,7 @@ public class dataserver : MonoBehaviour
 
 }
 
-class datasir
+public class datasir
 {
 
     

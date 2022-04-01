@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Launcher.unity
     guid: d7d9bce969f93f3458d3b4a4ab6be66e
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/AirHockjey/airplay.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/DodgeBall/DodgeBall.unity
     guid: 1f7fd391b9285a04db0ffdb84adfeac0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/BrickBreaker/BrickBreaker.unity
     guid: 73bcf975970885b4ab1692c69ef66366
   m_configObjects: {}

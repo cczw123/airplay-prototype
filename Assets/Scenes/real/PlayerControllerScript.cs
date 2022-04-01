@@ -8,12 +8,14 @@ using System.Threading;
 
 public class PlayerControllerScript: MonoBehaviour
 {
-	public GameObject cube;
+	public GameObject player;
+	public GameObject player2;
 	// 1. Declare Variables
 	Thread receiveThread; //1
 	UdpClient client; //2
 	public Camera cam;
 	int port; //3
+	coordinate myObject;
 
 	//public GameObject Player; //4
 	//AudioSource jumpSound; //5
@@ -51,10 +53,13 @@ public class PlayerControllerScript: MonoBehaviour
 				IPEndPoint anyIP = new IPEndPoint(IPAddress.Parse("0.0.0.0"), port); //3
 				byte[] data = client.Receive(ref anyIP); //4
 				string text = Encoding.UTF8.GetString(data); //5
-				coordinate myObject = JsonUtility.FromJson<coordinate>(text);
-				print (">> " + myObject.x + " " + myObject.y);
-				Vector2 position = new Vector2(myObject.x , myObject.y);
-				cube.transform.position = position;
+				myObject = JsonUtility.FromJson<coordinate>(text);
+				myObject.Convert();
+				print (">> " + myObject.x0 + " " + myObject.y0 + " " + myObject.nums);
+				
+				//Vector2 position = new Vector2(myObject.x , myObject.y);
+				//var newPlayer = Instantiate(player);
+				//newPlayer.transform.position = position;
 				
 
 			} catch(Exception e)
@@ -68,12 +73,41 @@ public class PlayerControllerScript: MonoBehaviour
 	// 6. Check for variable value, and make the Player Jump!
 	void Update () 
 	{
+        if (myObject != null)
+        {
+			player.transform.position = new Vector2(myObject.x0, myObject.y0);
+			if (player.transform.position.x < -0.89f)
+			{
+				player.transform.Translate(Vector2.left);
+			}
+			player2.transform.position = new Vector2(myObject.x1, myObject.y1);
+			if (player2.transform.position.x < -0.89f)
+			{
+				player2.transform.Translate(Vector2.left);
+			}
+		}
 		
 	}
 }
 
 public class coordinate
 {
-	public int x;
-	public int y;
+	public int nums = 0;
+	public float x0;
+	public float y0;
+	public float x1;
+	public float y1;
+	public float x2;
+	public float y2;
+
+	public void Convert()
+    {
+
+		x0 = 18.0f / 960 * x0 - 9;
+		x1 = 18.0f / 960 * x1 - 9;
+		x2 = 18.0f / 960 * x2 - 9;
+		y0 = 10.0f / 540 * y0 - 5;
+		y1 = 10.0f / 540 * y1 - 5;
+		y2 = 10.0f / 540 * y2 - 5;
+	}
 }
