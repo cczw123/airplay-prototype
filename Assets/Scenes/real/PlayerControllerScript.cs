@@ -10,12 +10,14 @@ public class PlayerControllerScript: MonoBehaviour
 {
 	public GameObject player;
 	public GameObject player2;
+	public GameObject dingwei;
 	// 1. Declare Variables
 	Thread receiveThread; //1
 	UdpClient client; //2
 	public Camera cam;
 	int port; //3
 	coordinate myObject;
+	bool local = false;
 
 	//public GameObject Player; //4
 	//AudioSource jumpSound; //5
@@ -53,9 +55,18 @@ public class PlayerControllerScript: MonoBehaviour
 				IPEndPoint anyIP = new IPEndPoint(IPAddress.Parse("0.0.0.0"), port); //3
 				byte[] data = client.Receive(ref anyIP); //4
 				string text = Encoding.UTF8.GetString(data); //5
-				myObject = JsonUtility.FromJson<coordinate>(text);
-				myObject.Convert();
-				print (">> " + myObject.x0 + " " + myObject.y0 + " " + myObject.nums);
+				if(text == "finish")
+                {
+					
+					local = true;
+                }
+                else if(local)
+                {
+					myObject = JsonUtility.FromJson<coordinate>(text);
+					myObject.Convert();
+					print(">> " + myObject.x0 + " " + myObject.y0 + " " + myObject.nums);
+				}
+				
 				
 				//Vector2 position = new Vector2(myObject.x , myObject.y);
 				//var newPlayer = Instantiate(player);
@@ -86,6 +97,11 @@ public class PlayerControllerScript: MonoBehaviour
 				player2.transform.Translate(Vector2.left);
 			}
 		}
+        if (local)
+        {
+			dingwei.SetActive(false);
+
+		}
 		
 	}
 }
@@ -107,7 +123,9 @@ public class coordinate
 		x1 = 18.0f / 960 * x1 - 9;
 		x2 = 18.0f / 960 * x2 - 9;
 		y0 = 10.0f / 540 * y0 - 5;
+		y0 *= -1;
 		y1 = 10.0f / 540 * y1 - 5;
+		y1 *= -1;
 		y2 = 10.0f / 540 * y2 - 5;
 	}
 }
