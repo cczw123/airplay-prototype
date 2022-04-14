@@ -55,6 +55,7 @@ public class PlayerControllerScript: MonoBehaviour
 				string text = Encoding.UTF8.GetString(data); //5
 				myObject = JsonUtility.FromJson<coordinate>(text);
 				myObject.Convert();
+				
 				print (">> " + myObject.x0 + " " + myObject.y0 + " " + myObject.nums);
 				
 				//Vector2 position = new Vector2(myObject.x , myObject.y);
@@ -73,6 +74,7 @@ public class PlayerControllerScript: MonoBehaviour
 	// 6. Check for variable value, and make the Player Jump!
 	void Update () 
 	{
+		
         if (myObject != null)
         {
 			player.transform.position = new Vector2(myObject.x0, myObject.y0);
