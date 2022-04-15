@@ -18,13 +18,18 @@ public class PlayerControllerScript: MonoBehaviour
 	int port; //3
 	coordinate myObject;
 	bool local = false;
+	public float distance;
 
-	//public GameObject Player; //4
-	//AudioSource jumpSound; //5
-	//bool jump; //6
+    //public GameObject Player; //4
+    //AudioSource jumpSound; //5
+    //bool jump; //6
 
-	// 2. Initialize variables
-	void Start () 
+    // 2. Initialize variables
+    private void Awake()
+    {
+		distance = Vector2.Distance(dingwei.transform.GetChild(0).position,dingwei.transform.GetChild(1).position);    
+    }
+    void Start () 
 	{
 		port = 5065; //1 
 		//jump = false; //2 
@@ -63,7 +68,7 @@ public class PlayerControllerScript: MonoBehaviour
                 else if(local)
                 {
 					myObject = JsonUtility.FromJson<coordinate>(text);
-					myObject.Convert();
+					myObject.Convert(distance, dingwei.transform.GetChild(1).position);
 					print(">> " + myObject.x0 + " " + myObject.y0 + " " + myObject.nums);
 				}
 				
@@ -113,19 +118,15 @@ public class coordinate
 	public float y0;
 	public float x1;
 	public float y1;
-	public float x2;
-	public float y2;
+	
 
-	public void Convert()
+	public void Convert(float distance, Vector2 point2)
     {
+		x0 = x0 * distance + point2.x;
+		y0 = y0 * distance + point2.y;
+		x1 = x1 * distance + point2.x;
+		y1 = y1 * distance + point2.y;
+		
 
-		x0 = 18.0f / 960 * x0 - 9;
-		x1 = 18.0f / 960 * x1 - 9;
-		x2 = 18.0f / 960 * x2 - 9;
-		y0 = 10.0f / 540 * y0 - 5;
-		y0 *= -1;
-		y1 = 10.0f / 540 * y1 - 5;
-		y1 *= -1;
-		y2 = 10.0f / 540 * y2 - 5;
 	}
 }
