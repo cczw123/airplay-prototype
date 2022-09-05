@@ -7,11 +7,11 @@ using RosPos = RosMessageTypes.ApInterfaces.PosMsg;
 public class posmessage : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject objects1;
-    public GameObject objects2;
-    public GameObject objects3;
-    public GameObject objects4;
-
+    public GameObject objectbase;
+    public List<GameObject> objects;
+    public List<float> x;
+    public List<float> y;
+    public List<float> r;
     private void Awake()
     {
         for (int i = 1; i < Display.displays.Length; i++)
@@ -38,89 +38,37 @@ public class posmessage : MonoBehaviour
 
     void posChange(RosPos rosPos)
     {
-        objects1.SetActive(false);
-        objects2.SetActive(false);
-        objects3.SetActive(false);
-        objects4.SetActive(false);
+
         int player_num = rosPos.total;
-        float[] x = new float[4] { 0.0f, 0.0f, 0.0f, 0.0f };
-        float[] y = new float[4] { 0.0f, 0.0f, 0.0f, 0.0f };
-        float[] r = new float[4] { 0.0f, 0.0f, 0.0f, 0.0f };
+        
+        while(objects.Count < player_num)
+        {
+            objects.Add(Instantiate(objectbase));
+            x.Add(0);
+            y.Add(0);
+            r.Add(0);
+        }
+
+        while(objects.Count > player_num)
+        {
+            objects.Remove(objects[objects.Count-1]);
+            x.Remove(x[x.Count - 1]);
+            y.Remove(y[y.Count - 1]);
+            r.Remove(r[r.Count - 1]);
+        }
+
         for (int i = 0; i < player_num; i++)
         {
             x[i] = (float)rosPos.x[i];
             y[i] = (float)rosPos.y[i];
             r[i] = (float)rosPos.size[i]/40f;
 
-        }
-
-        if (player_num == 1)
-        {
-            objects1.SetActive(true);
-            var pos1 = Camera.main.ScreenToWorldPoint(new Vector3(x[0], y[0], Camera.main.nearClipPlane));
-            //pos1 = Normlization(pos1);
+            var pos1 = Camera.main.ScreenToWorldPoint(new Vector3(x[i], y[i], Camera.main.nearClipPlane));
             pos1.z = 0;
-            objects1.transform.position = pos1;
-            DrawCircle(objects1, 200, r[0], 0.2f);
-        }
-        if (player_num == 2)
-        {
-            objects1.SetActive(true);
-            var pos1 = Camera.main.ScreenToWorldPoint(new Vector3(x[0], y[0], Camera.main.nearClipPlane));
-            pos1.z = 0f;
-            objects1.transform.position = pos1;
-            objects2.SetActive(true);
-            var pos2 = Camera.main.ScreenToWorldPoint(new Vector3(x[1], y[1], Camera.main.nearClipPlane));
-            pos2.z = 0f;
-            objects2.transform.position = pos2;
-            DrawCircle(objects1, 200, r[0], 0.2f);
-            DrawCircle(objects2, 200, r[1], 0.2f);
-        }
-
-        if (player_num == 3)
-        {
-            objects1.SetActive(true);
-            var pos1 = Camera.main.ScreenToWorldPoint(new Vector3(x[0], y[0], Camera.main.nearClipPlane));
-            pos1.z = 0;
-            objects1.transform.position = pos1;
-            objects2.SetActive(true);
-            var pos2 = Camera.main.ScreenToWorldPoint(new Vector3(x[1], y[1], Camera.main.nearClipPlane));
-            pos2.z = 0;
-            objects2.transform.position = pos2;
-            objects3.SetActive(true);
-            var pos3 = Camera.main.ScreenToWorldPoint(new Vector3(x[2], y[2], Camera.main.nearClipPlane));
-            pos3.z = 0;
-            objects3.transform.position = pos3;
-            DrawCircle(objects1, 200, r[0], 0.2f);
-            DrawCircle(objects2, 200, r[1], 0.2f);
-            DrawCircle(objects3, 200, r[2], 0.2f);
-        }
-
-        if (player_num == 4)
-        {
-            objects1.SetActive(true);
-            var pos1 = Camera.main.ScreenToWorldPoint(new Vector3(x[0], y[0], Camera.main.nearClipPlane));
-            pos1.z = 0;
-            objects1.transform.position = pos1;
-            objects2.SetActive(true);
-            var pos2 = Camera.main.ScreenToWorldPoint(new Vector3(x[1], y[1], Camera.main.nearClipPlane));
-            pos2.z = 0;
-            objects2.transform.position = pos2;
-            objects3.SetActive(true);
-            var pos3 = Camera.main.ScreenToWorldPoint(new Vector3(x[2], y[2], Camera.main.nearClipPlane));
-            pos3.z = 0;
-            objects3.transform.position = pos3;
-            objects4.SetActive(true);
-            var pos4 = Camera.main.ScreenToWorldPoint(new Vector3(x[3], y[3], Camera.main.nearClipPlane));
-            pos4.z = 0;
-            objects4.transform.position = pos4;
-            DrawCircle(objects1, 200, r[0], 0.2f);
-            DrawCircle(objects2, 200, r[1], 0.2f);
-            DrawCircle(objects3, 200, r[2], 0.2f);
-            DrawCircle(objects4, 200, r[3], 0.2f);
+            objects[i].transform.position = pos1;
+            DrawCircle(objects[i], 200, r[i], 0.2f);
 
         }
-
 
 
         //var x = (float)rosPos.x[0];
