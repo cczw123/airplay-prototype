@@ -32,4 +32,13 @@ Make sure this option is checked before WebGL building
 
 ## 5. Ros2 connection
 ![ros2](connection.PNG)
-![ros22](connection1.PNG)
+![ros22](connection1.PNG)  
+
+## 6. Camera Adujustment
+orthonormal camera size. 1 means 1 unit height, width is determined by the resolution. 
+Coordinate is divided by 100.  
+
+## 7. Vector graphics install
+![install](graphicinstall.PNG)
+
+

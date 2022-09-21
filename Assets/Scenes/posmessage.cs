@@ -67,6 +67,8 @@ public class posmessage : MonoBehaviour
             pos1.z = 0;
             objects[i].transform.position = pos1;
             DrawCircle(objects[i], 200, r[i], 0.2f);
+            //update colliders
+
 
         }
 
